@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Tareas from'./components/Tareas'
 import Weather from './components/Weather'
+import Maps from './components/Maps'
 import {todos} from'./todos.json'
 import {  Link, Route, Switch } from "react-router-dom";
 
@@ -103,16 +104,13 @@ this.setState({
     </ul>
         <Switch>
           <Route path="/weather" component={Weather} />
-
+          <Route path="/mapas" component={Maps} />
           <Route path="/tareas" component={Tareas} />
         </Switch>
     <img src={logo} className="App-logo" alt="logo" />
-      
-         
-
-      </div>
+ </div>
     );
-  }
+  } 
 }
 
 export default App;
