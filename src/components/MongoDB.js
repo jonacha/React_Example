@@ -7,13 +7,16 @@ import {todos} from'../todos.json'
 
 
 
-class Tareas extends Component {
+
+class MongoDB extends Component {
 
 //class App extends React.Component { Dos opciones para los metodos
   constructor(){
     super();
     this.state={
       todos,
+      traducciones:undefined,
+      traduccionesE:undefined,
       temperatura:undefined,
       ciudad:undefined,
       pais:undefined,
@@ -23,6 +26,9 @@ class Tareas extends Component {
 
   this.handleAddTodo=this.handleAddTodo.bind(this);
   this.borrar=this.borrar.bind(this);
+  this.getTraducciones=this.getTraducciones.bind(this);
+    this.render=this.render.bind(this);
+  this.getTraducciones();
   //this.getTiempo=this.getTiempo.bind(this); //Metodo tradicional hay que poner todo hay
   }
 
@@ -47,22 +53,38 @@ this.setState({
 })
 }
 }
-  render() {//Metodo dibujado
 
-    //console.log(this.state.todos)
-   const todos= this.state.todos.map((todo,i)=>{
+getTraducciones(){
+
+   fetch('https://traductor2.herokuapp.com/api/traduccion', {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+
+          console.log(data);
+          this.state.traducciones=data;
+          this.state.traduccionesE=this.state.traducciones.map((todo,i)=>{
       return(
      <div className="col-md-4" key={i}>
    
           <div className="card mt-4">
             <div className="card-header">
 
-             <h3>{todo.title} </h3>
-              <span className="badge badge-pill badge-dark ml-2">{todo.priority} </span>
+             <h3>Numero de traduccion {i+1} </h3>
+           
             </div>
            <div  className="card-body">
-           <p> {todo.descrition}</p>
-              <p> {todo.responsibe}</p>
+           <row> <p> Idioma A {todo.idiomaA}</p>
+              <p>Texto A {todo.Ttraduccion}</p></row>
+
+            <row> <p> Idioma B {todo.idiomaB}</p>
+              <p>Texto B {todo.Atraduccion}</p></row>
             </div> 
           <div className="card-footer">
           <button 
@@ -71,12 +93,24 @@ this.setState({
           </button>
 
           </div>
+
           </div>
 
            </div>
         
         )
     })
+     this.setState({})
+
+     
+        })
+        .catch(err => console.error(err));
+}
+
+
+  render() {//Metodo dibujado
+
+
 
     return (
       <div className="App">
@@ -88,7 +122,7 @@ this.setState({
 
           <br></br>
                      <nav className="navbar navbar-dark bg-dark"> 
-          <a href="" className="text-white">Creador de tareas sin base de datos <span className="badge badge-pill badge-light ml-2"> {this.state.todos.length} </span>
+          <a href="" className="text-white">Traductor con MongoDB <span className="badge badge-pill badge-light ml-2"> {this.state.todos.length} </span>
           </a>
 
           </nav>
@@ -96,8 +130,9 @@ this.setState({
       {this.state.title}-{this.state.ntareas}
       <div className="container"> 
         <div className="row mt-4"> 
-              {todos}
-
+         
+            
+              {this.state.traduccionesE}
         </div>
 
       </div>
@@ -107,4 +142,4 @@ this.setState({
   }
 }
 
-export default Tareas;
+export default MongoDB;
