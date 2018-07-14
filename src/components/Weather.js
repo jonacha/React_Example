@@ -1,4 +1,4 @@
- import React, { Component } from 'react';
+ import React, { Component ,} from 'react';
 import '../App.css';
 import Titles from "./Titles"
 import Form from "./Form"
@@ -67,8 +67,8 @@ class Weather extends Component {
 
     return (
       <div className="App">
-
-          <div  className="card mt-4">
+   <div class="container"> 
+          <div  className="card float">
           <div className ="card-header">
                <Titles/>
           </div>
@@ -87,6 +87,7 @@ class Weather extends Component {
           </div>
 
 
+      </div>
       </div>
     );
   }

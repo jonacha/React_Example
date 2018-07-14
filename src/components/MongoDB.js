@@ -68,6 +68,7 @@ getTraducciones(){
         .then(data => {
 
           console.log(data);
+/*
           this.state.traducciones=data;
           this.state.traduccionesE=this.state.traducciones.map((todo,i)=>{
       return(
@@ -99,9 +100,46 @@ getTraducciones(){
            </div>
         
         )
-    })
-     this.setState({})
+    })*/
 
+
+
+     this.setState({
+          traducciones:data,
+          traduccionesE:data.map((todo,i)=>{
+      return(
+     <div className="col-md-4" key={i}>
+   
+          <div className="card mt-4">
+            <div className="card-header">
+
+             <h3>Numero de traduccion {i+1} </h3>
+           
+            </div>
+           <div  className="card-body">
+           <row> <p> Idioma A {todo.idiomaA}</p>
+              <p>Texto A {todo.Ttraduccion}</p></row>
+
+            <row> <p> Idioma B {todo.idiomaB}</p>
+              <p>Texto B {todo.Atraduccion}</p></row>
+            </div> 
+          <div className="card-footer">
+          <button 
+            onClick={this.borrar.bind(this,i)}
+            className="btn btn-danger"> Delete
+          </button>
+
+          </div>
+
+          </div>
+
+           </div>
+        
+        )
+    })
+
+     })
+     this.setState({})
      
         })
         .catch(err => console.error(err));
