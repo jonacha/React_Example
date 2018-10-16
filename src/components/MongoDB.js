@@ -55,10 +55,10 @@ this.setState({
 }
 
 getTraducciones(){
-
-   fetch('https://traductor2.herokuapp.com/api/traduccion', {
-        method: 'POST',
-        body: JSON.stringify(this.state),
+//http://aldeasinfantiles-wp.lin3sdev.com/wp-json/wp/v2/posts?filter%5Borderby%5D=date&order=desc&categories=1&per_page=9&page=1&_embed:
+   fetch('http://aldeasinfantiles-wp.lin3sdev.com/wp-json/wp/v2/posts?filter%5Borderby%5D=date&order=desc&categories=1&per_page=9&page=1&_embed', {
+        method: 'GET',
+      //  body: JSON.stringify(this.state),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -66,8 +66,8 @@ getTraducciones(){
       })
         .then(res => res.json())
         .then(data => {
-
-          console.log(data);
+          console.log("los datos son")
+          console.log(data[0].better_featured_image.media_details.sizes.small.source_url);
 /*
           this.state.traducciones=data;
           this.state.traduccionesE=this.state.traducciones.map((todo,i)=>{
@@ -111,25 +111,19 @@ getTraducciones(){
      <div className="col-md-4" key={i}>
    
           <div className="card mt-4">
-            <div className="card-header">
+            <div className="user-card-header">
 
-             <h3>Numero de traduccion {i+1} </h3>
+  <img src={todo.better_featured_image.media_details.sizes.small.source_url} />
            
             </div>
            <div  className="card-body">
-           <row> <p> Idioma A {todo.idiomaA}</p>
-              <p>Texto A {todo.Ttraduccion}</p></row>
+           <row> <p> {todo.date}</p>
+              <p> {todo.title.rendered}</p></row>
 
-            <row> <p> Idioma B {todo.idiomaB}</p>
-              <p>Texto B {todo.Atraduccion}</p></row>
+            <row> <p> VER MÁS</p>
+             </row>
             </div> 
-          <div className="card-footer">
-          <button 
-            onClick={this.borrar.bind(this,i)}
-            className="btn btn-danger"> Delete
-          </button>
-
-          </div>
+      
 
           </div>
 
@@ -164,10 +158,10 @@ getTraducciones(){
           </a>
 
           </nav>
-                <TodoForms onAddTodo={this.handleAddTodo}/> 
+
       {this.state.title}-{this.state.ntareas}
       <div className="container"> 
-        <div className="row mt-4"> 
+        <div className="row mt-6"> 
          
             
               {this.state.traduccionesE}

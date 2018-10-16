@@ -7,6 +7,7 @@ import Maps from './components/Maps'
 import MongoDB from './components/MongoDB'
 import Perfil from './components/Perfil'
 import {todos} from'./todos.json'
+import Home from './components/Home'
 import { Link, Route, Switch } from "react-router-dom";
 
 
@@ -98,14 +99,15 @@ this.setState({
         {/* Comentario <Navigation titulo="Navegando"/> */}
   
        <ul>
-      <li><Link to="/Info">Home</Link></li>
+      <li><Link to="/home">Home</Link></li>
+      <li><Link to="/Info">Perfil</Link></li>
       <li><Link to="/weather">Weather</Link></li>
       <li> <Link to="/mapas">Mapas</Link></li>
       <li> <Link to="/mongodb">MongoDB</Link></li>
       <li> <Link to="/tareas">Tareas</Link></li>
     </ul>
         <Switch>
-          <Route path="/Info" component={Perfil} />
+          <Route path="/home" component={Home} />
           <Route path="/weather" component={Weather} />
           <Route path="/mapas" component={Maps} />
           <Route path="/mongodb" component={MongoDB} />
